@@ -1,0 +1,46 @@
+package me.JJAACCO.Troll;
+
+import java.util.ArrayList;
+
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+public class troll extends JavaPlugin {
+	
+	ArrayList<String> troller = new ArrayList<String>();
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String CommandLabel, String[] args) {
+		if (!(sender instanceof Player)) {
+			if (cmd.getName().equalsIgnoreCase("troll")){
+			sender.sendMessage(ChatColor.RED + "Console cannot use Troll");	
+			return false;
+			}
+		Player player = (Player) sender;
+		if (troller.contains(player.getName())){
+			player.setGameMode(GameMode.SURVIVAL);
+			player.removePotionEffect(PotionEffectType.INVISIBILITY);
+			player.removePotionEffect(PotionEffectType.NIGHT_VISION);
+			player.setPlayerListName(player.getName());
+			player.sendMessage(ChatColor.RED + "Troll disabled!");
+			troller.remove(player.getName());
+			return true;
+			}
+		else { 
+			troller.add(player.getName());
+			player.setGameMode(GameMode.CREATIVE);
+			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 100000, 1));
+			player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 100000, 1));
+			player.sendMessage(ChatColor.AQUA + "Troll activated");
+			player.setPlayerListName(ChatColor.GREEN + "[" + ChatColor.RED + ChatColor.BOLD + "TROLL" + ChatColor.GREEN + "]");
+		return true;
+		}
+}
+		return true;
+}
+}
