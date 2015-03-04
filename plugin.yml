@@ -1,0 +1,10 @@
+name: Troll
+version: 1.0
+main: me.JJAACCO.Troll.troll
+author: JJAACCO
+description: Troll Plugin
+
+commands: 
+      troll:
+          usage: /<command>
+          description: toggles troll
